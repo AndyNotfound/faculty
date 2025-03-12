@@ -13,7 +13,6 @@ import {
 } from "lucide-vue-next";
 import type {
     Value,
-    MenuItem,
     Menu,
     Stat,
     Slide,

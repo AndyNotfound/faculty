@@ -43,7 +43,7 @@ export default defineComponent({
                 } else {
                     clearInterval(this.interval);
                 }
-            }, 50); // Adjust for smoother animation (50ms * 100 = 5000ms/5s)
+            }, 50);
         },
     },
     mounted() {
@@ -82,8 +82,8 @@ export default defineComponent({
             :spaceBetween="30"
             :centeredSlides="true"
             :autoplay="{
-            delay: 2500,
-            disableOnInteraction: false
+                delay: 5000,
+                disableOnInteraction: false
             }"
             :navigation="true"
             :modules="modules"
@@ -122,7 +122,7 @@ export default defineComponent({
             <template #container-end>
                 <div class="autoplay-progress">
                     <svg viewBox="0 0 48 48" ref="progressCircle">
-                    <circle cx="24" cy="24" r="20"></circle>
+                        <circle cx="24" cy="24" r="20"></circle>
                     </svg>
                     <span ref="progressContent"></span>
                 </div>
@@ -202,11 +202,22 @@ export default defineComponent({
     cursor: pointer;
 }
 
-/* Default state for navigation arrows (hidden) */
-.swiper-button-next,
-.swiper-button-prev {
+/* 
+    Default state for navigation arrows (hidden) 
+*/
+.swiper-button-prev,
+.swiper-button-next {
     opacity: 0;
-    transition: opacity 0.3s ease;
+    /* visibility: hidden; */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
+}
+
+/* Make arrows visible when hovered */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    opacity: 1;
+    /* visibility: visible; */
 }
 
 /* Positioning the left and right navigation arrows */

@@ -1,4 +1,5 @@
 <template>
+    <img src="/images/rec.png" class="w-full h-fit" />
     <footer class="bg-black text-white py-10 px-6 md:px-[40px]">
         <div class="flex justify-between gap-6 py-[40px]">
 
@@ -15,6 +16,9 @@
             </div>
     
             <!-- Middle: Links -->
+            <!--  
+            
+            -->
             <div class="flex justify-end gap-[40px]">
                 <div>
                     <h4 class="font-semibold mb-3">Company</h4>
@@ -37,7 +41,7 @@
                     <!-- Right: Contact -->
                 <div>
                     <h4 class="font-semibold mb-3">Contact</h4>
-                    <p class="text-gray-400 text-sm">📩 <a href="#" class="text-gray-300 hover:text-white">customercare@smm.salvationarmy.org</a></p>
+                    <p class="text-gray-400 text-sm flex items-center">📩 <a href="#" class="text-gray-300 hover:text-white">customercare@smm.salvationarmy.org</a></p>
                     <p class="text-gray-400 text-sm">📞 +65 6288 5438</p>
                     <p class="text-gray-400 text-sm">📍 356 Tanglin Road, Singapore 247674</p>
                     <p class="text-gray-400 text-sm">🕒 8:30 am – 5:30 pm (Mon-Sat)</p>

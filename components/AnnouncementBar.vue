@@ -28,7 +28,7 @@ defineProps<{
 .marquee-container {
     overflow: hidden;
     white-space: nowrap;
-    width: 100%;
+    width: 100vw;
     display: flex;
     justify-content: start;
 }

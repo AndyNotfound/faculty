@@ -6,7 +6,8 @@ export default defineNuxtConfig({
   modules: [
     'shadcn-nuxt',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    '@vueuse/motion/nuxt'
   ],
   shadcn: {
     /**
@@ -24,5 +25,5 @@ export default defineNuxtConfig({
       Inter: [400, 500, 600, 700],
       'Neue Regrade': [600]
     }
-  }
+  },
 })

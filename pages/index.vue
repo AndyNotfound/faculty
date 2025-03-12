@@ -148,11 +148,11 @@ const stats = reactive<Stat[]>([
         <AnnouncementBar :list="announcements" />   
         <Navbar :menus="menus" />
         <main>
-            <!-- 
-                <Carousel /> 
-                <TestCarousel/> 
-            -->
+            <HomeSectionHero /> 
             <HomeSectionStats :stats="stats" />
+            <!-- 
+                <HomeSectionPillars /> 
+            -->
             <HomeSectionValues :values="values" />
             <HomeSectionFaq />
             <HomeSectionCommunity />

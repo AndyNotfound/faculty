@@ -31,7 +31,7 @@ const props = defineProps<{
 
                 <!-- Navigation Links -->
                 <nav class="text-center space-y-[16px]">
-                    <div v-for="(link, index) in companyLinks" :key="index">
+                    <div v-for="(link, index) in [...companyLinks, ...joinUsLinks]" :key="index">
                         <NuxtLink :to="link.url" class="block hover:text-white">
                             {{ link.title }}
                         </NuxtLink>

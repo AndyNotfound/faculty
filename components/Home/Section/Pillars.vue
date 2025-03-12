@@ -1,3 +1,32 @@
+<script lang="ts" setup>
+const sections = [
+    {
+        image: '/images/store.jpg',
+        title: 'Store',
+        description: 'Discover unique finds and support a good cause.',
+        link: '/store',
+    },
+    {
+        image: '/images/community.jpg',
+        title: 'Community',
+        description: 'Join our mission to uplift and empower communities.',
+        link: '/community',
+    },
+    {
+        image: '/images/partners.jpg',
+        title: 'Partners',
+        description: 'Partner with us to make a lasting impact.',
+        link: '/partners',
+    },
+    {
+        image: '/images/lives.jpg',
+        title: 'Lives',
+        description: 'See how your contributions change lives.',
+        link: '/lives',
+    },
+];
+</script>
+
 <template>
     <div class="bg-black text-white">
         <div
@@ -30,35 +59,6 @@
         </div>
     </div>
 </template>
-
-<script lang="ts" setup>
-const sections = [
-    {
-        image: '/images/store.jpg',
-        title: 'Store',
-        description: 'Discover unique finds and support a good cause.',
-        link: '/store',
-    },
-    {
-        image: '/images/community.jpg',
-        title: 'Community',
-        description: 'Join our mission to uplift and empower communities.',
-        link: '/community',
-    },
-    {
-        image: '/images/partners.jpg',
-        title: 'Partners',
-        description: 'Partner with us to make a lasting impact.',
-        link: '/partners',
-    },
-    {
-        image: '/images/lives.jpg',
-        title: 'Lives',
-        description: 'See how your contributions change lives.',
-        link: '/lives',
-    },
-];
-</script>
 
 <style scoped>
 html {

@@ -4,7 +4,12 @@ import {
     Store, 
     ShoppingBasket, 
     Handshake, 
-    Users 
+    Users,
+    Facebook, 
+    Instagram, 
+    Mail, 
+    Phone, 
+    MapPin
 } from "lucide-vue-next";
 
 type Value = {
@@ -30,6 +35,30 @@ interface Stat {
     value: number;
     icon: any;
     color: string;
+}
+
+interface Slide {
+    image: string;
+    title: string;
+    description: string;
+    buttonText: string;
+    link: string;
+}
+
+interface Link {
+    title: string;
+    url: string;
+}
+
+interface ContactInfo {
+    icon: any;
+    text: string;
+    link?: string;
+}
+
+interface SocialLink {
+    icon: any;
+    link: string;
 }
 
 const announcements = reactive<string[]>([
@@ -141,6 +170,87 @@ const stats = reactive<Stat[]>([
         color: "text-blue-500"
     }
 ])
+
+const slides = reactive<Slide[]>([
+    {
+        image: '/images/slide1.jpeg',
+        title: 'Give. Thrift. Uplift.',
+        description: 'Discover great finds while making an impact.',
+        buttonText: 'Learn More',
+        link: '/learn',
+    },
+    {
+        image: '/images/slide2.jpeg',
+        title: 'Support a Sustainable Future',
+        description: 'Shop pre-loved items and reduce waste.',
+        buttonText: 'Start Thrifting',
+        link: '/thrift',
+    },
+    {
+        image: '/images/slide3.jpeg',
+        title: 'Join the Movement',
+        description: 'Be part of the change for a better future.',
+        buttonText: 'Join Now',
+        link: '/join',
+    },
+])
+
+const companyLinks = reactive<Link[]>([
+    { 
+        title: 'FAQs', 
+        url: '/' 
+    },
+    { 
+        title: 'About us', 
+        url: '/' 
+    },
+    { 
+        title: 'The Salvation Army', 
+        url: '/' 
+    },
+]);
+
+const joinUsLinks = reactive<Link[]>([
+    { 
+        title: 'Volunteer', 
+        url: '/' 
+    },
+    { 
+        title: 'Corporate Partnerships', 
+        url: '/' 
+    },
+    { 
+        title: 'Join as staff', 
+        url: '/' 
+    },
+]);
+
+const contactInfo = reactive<ContactInfo[]>([
+    { 
+        icon: Mail, 
+        text: 'customercare@smm.salvationarmy.org', 
+        link: 'mailto:customercare@smm.salvationarmy.org' 
+    },
+    { 
+        icon: Phone, 
+        text: '+65 6288 5438' 
+    },
+    { 
+        icon: MapPin, 
+        text: '356 Tanglin Road, Singapore 247674' 
+    },
+]);
+
+const socialLinks = reactive<SocialLink[]>([
+    { 
+        icon: Facebook, 
+        link: '/' 
+    },
+    { 
+        icon: Instagram, 
+        link: '/' 
+    },
+]);
 </script>
 
 <template>
@@ -148,7 +258,7 @@ const stats = reactive<Stat[]>([
         <AnnouncementBar :list="announcements" />   
         <Navbar :menus="menus" />
         <main>
-            <HomeSectionHero /> 
+            <HomeSectionHero :slides="slides" /> 
             <HomeSectionStats :stats="stats" />
             <!-- 
                 <HomeSectionPillars /> 
@@ -157,6 +267,11 @@ const stats = reactive<Stat[]>([
             <HomeSectionFaq />
             <HomeSectionCommunity />
         </main>
-        <Footer />
+        <Footer 
+            :companyLinks="companyLinks"
+            :joinUsLinks="joinUsLinks"
+            :contactInfo="contactInfo"
+            :socialLinks="socialLinks"
+        />
     </div>
 </template>

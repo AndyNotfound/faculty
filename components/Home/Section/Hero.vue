@@ -1,16 +1,101 @@
+<script lang="ts">
+import { defineComponent, ref, onUnmounted } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
+interface Slide {
+    image: string;
+    title: string;
+    description: string;
+    buttonText: string;
+    link: string;
+}
+
+export default defineComponent({
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    props: {
+        slides: {
+            type: Array as () => Slide[],
+            required: true,
+        },
+    },
+    data() {
+        return {
+            modules: [Autoplay, Pagination, Navigation],
+            leftHover: false,
+            rightHover: false,
+            activeIndex: 0,
+            progress: 0,
+            interval: null as any,
+        };
+    },
+    methods: {
+        onSlideChange(swiper: any) {
+            this.activeIndex = swiper.realIndex;
+            this.resetProgress();
+        },
+        resetProgress() {
+            this.progress = 0;
+            clearInterval(this.interval);
+    
+            this.interval = setInterval(() => {
+                if (this.progress < 100) {
+                    this.progress += 1;
+                } else {
+                    clearInterval(this.interval);
+                }
+            }, 50); // Adjust for smoother animation (50ms * 100 = 5000ms/5s)
+        },
+    },
+    mounted() {
+        this.resetProgress();
+    },
+    onUnmounted() {
+        clearInterval(this.interval);
+    },
+    setup() {
+        const progressCircle = ref<SVGCircleElement | null>(null);
+        const progressContent = ref<HTMLElement | null>(null);
+    
+        const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
+            if (progressCircle.value) {
+                progressCircle.value.style.setProperty('--progress', (1 - progress).toString());
+            }
+            if (progressContent.value) {
+                progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
+            }
+        };
+
+        return {
+            progressCircle,
+            progressContent,
+            onAutoplayTimeLeft,
+            leftHover: ref(false),
+            rightHover: ref(false),
+        };
+    },
+});
+</script>
+
 <template>
     <div class="md:py-[24px] md:px-[36px] md:rounded-[24px] h-fit relative">
-        <swiper 
-            :spaceBetween="30" 
-            :centeredSlides="true" 
+        <swiper
+            :spaceBetween="30"
+            :centeredSlides="true"
             :autoplay="{
-                delay: 2500,
-                disableOnInteraction: false
-            }" 
-            :navigation="true" 
-            :modules="modules" 
+            delay: 2500,
+            disableOnInteraction: false
+            }"
+            :navigation="true"
+            :modules="modules"
             @slideChange="onSlideChange"
-            @autoplayTimeLeft="onAutoplayTimeLeft" 
+            @autoplayTimeLeft="onAutoplayTimeLeft"
             class="hero-swiper relative"
         >
             <swiper-slide 
@@ -24,9 +109,8 @@
                     alt="Slide Image" 
                 />
                 <div class="absolute inset-0 bg-black bg-opacity-40" />
-    
-                <!-- Text Overlay -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+                    <!-- Text Overlay -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
                     <h1 class="text-3xl md:text-5xl font-bold">
                         {{ slide.title }}
                     </h1>
@@ -34,18 +118,18 @@
                         {{ slide.description }}
                     </p>
                     <NuxtLink 
-                        :to="slide.link"
+                        :to="slide.link" 
                         class="mt-6 px-6 py-3 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition"
                     >
                         {{ slide.buttonText }}
                     </NuxtLink>
                 </div>
             </swiper-slide>
-    
+
             <template #container-end>
                 <div class="autoplay-progress">
                     <svg viewBox="0 0 48 48" ref="progressCircle">
-                        <circle cx="24" cy="24" r="20"></circle>
+                    <circle cx="24" cy="24" r="20"></circle>
                     </svg>
                     <span ref="progressContent"></span>
                 </div>
@@ -53,12 +137,19 @@
         </swiper>
 
         <div class="custom-pagination">
-            <div
-                v-for="(_, index) in slides"
-                :key="index"
+            <div 
+                v-for="(_, index) in slides" 
+                :key="index" 
                 class="pagination-bar"
             >
-                <div class="progress" :style="{ width: activeIndex === index ? progress + '%' : (index < activeIndex ? '100%' : '0%') }"></div>
+                <div 
+                    class="progress" 
+                    :style="{ 
+                        width:  activeIndex === index 
+                                ? progress + '%' 
+                                : (index < activeIndex ? '100%' : '0%') 
+                    }"
+                />
             </div>
         </div>
 
@@ -68,110 +159,27 @@
             <div 
                 class="w-1/2 h-full left-half" 
                 @mouseenter="leftHover = true" 
-                @mouseleave="leftHover = false"
+                @mouseleave="leftHover = false" 
             />
             <!-- Right Hover Area -->
             <div 
                 class="w-1/2 h-full right-half" 
                 @mouseenter="rightHover = true" 
-                @mouseleave="rightHover = false"
+                @mouseleave="rightHover = false" 
             />
         </div>
 
         <!-- Navigation Arrows -->
         <div 
-            v-if="leftHover"
-            class="swiper-button-prev absolute top-1/2 left-6 transform -translate-y-1/2 z-10 opacity-100 transition-opacity duration-300"
+            v-if="leftHover" 
+            class="swiper-button-prev absolute top-1/2 left-6 transform -translate-y-1/2 z-10 opacity-100 transition-opacity duration-300" 
         />
         <div 
-            v-if="rightHover"
-            class="swiper-button-next absolute top-1/2 right-6 transform -translate-y-1/2 z-10 opacity-100 transition-opacity duration-300"
+            v-if="rightHover" 
+            class="swiper-button-next absolute top-1/2 right-6 transform -translate-y-1/2 z-10 opacity-100 transition-opacity duration-300" 
         />
     </div>
 </template>
-
-<script>
-import { ref } from "vue";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-
-export default {
-    components: {
-        Swiper,
-        SwiperSlide
-    },
-    data() {
-        return {
-            slides: [
-                {
-                    image: "/images/slide1.jpeg",
-                    title: "Give. Thrift. Uplift.",
-                    description: "Discover great finds while making an impact.",
-                    buttonText: "Learn More",
-                    link: "/learn"
-                },
-                {
-                    image: "/images/slide2.jpeg",
-                    title: "Support a Sustainable Future",
-                    description: "Shop pre-loved items and reduce waste.",
-                    buttonText: "Start Thrifting",
-                    link: "/thrift"
-                },
-            ],
-            modules: [Autoplay, Pagination, Navigation],
-            leftHover: false,
-            rightHover: false,
-            activeIndex: 0,
-            progress: 0,
-            interval: null
-        };
-    },
-    methods: {
-        onSlideChange(swiper) {
-            this.activeIndex = swiper.realIndex;
-            this.resetProgress();
-        },
-        resetProgress() {
-            this.progress = 0;
-            clearInterval(this.interval);
-
-            this.interval = setInterval(() => {
-                if (this.progress < 100) {
-                    this.progress += 1;
-                } else {
-                    clearInterval(this.interval);
-                }
-            }, 50); // Adjust for smoother animation (50ms * 100 = 5000ms/5s)
-        }
-    },
-    mounted() {
-        this.resetProgress();
-    },
-    onUnmounted() {
-        clearInterval(this.interval);
-    },
-    setup() {
-        const progressCircle = ref(null);
-        const progressContent = ref(null);
-
-        const onAutoplayTimeLeft = (s, time, progress) => {
-            progressCircle.value.style.setProperty("--progress", 1 - progress);
-            progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
-        };
-
-        return {
-            progressCircle,
-            progressContent,
-            onAutoplayTimeLeft,
-            leftHover: ref(false),
-            rightHover: ref(false),
-        };
-    }
-};
-</script>
 
 <style lang="postcss">
 .hero-swiper {
@@ -260,7 +268,7 @@ export default {
 
 @screen md {
     .custom-pagination {
-        bottom: 50px;
+    bottom: 50px;
     }
 }
 

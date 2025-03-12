@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -18,7 +18,7 @@ const schema = yup.object({
     email: yup.string().email("Invalid email format").notRequired(),
 });
 
-const onSubmit = (values) => {
+const onSubmit = (values: any) => {
     console.log("Form submitted:", values);
 };
 </script>

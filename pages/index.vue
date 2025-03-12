@@ -157,6 +157,6 @@ const stats = reactive<Stat[]>([
             <HomeSectionFaq />
             <HomeSectionCommunity />
         </main>
-        <!-- <Footer /> -->
+        <Footer />
     </div>
 </template>

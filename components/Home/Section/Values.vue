@@ -6,13 +6,7 @@ import {
     AccordionContent,
 } from "@/components/ui/accordion";
 import { ref } from 'vue';
-
-interface Value {
-    title: string;
-    description: string;
-    icon: string;
-    color: string;
-}
+import type { Value } from '@/types/types.ts'
 
 const props = defineProps<{
     values: Value[];

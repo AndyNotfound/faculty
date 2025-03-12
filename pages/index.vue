@@ -11,55 +11,17 @@ import {
     Phone, 
     MapPin
 } from "lucide-vue-next";
+import type {
+    Value,
+    MenuItem,
+    Menu,
+    Stat,
+    Slide,
+    Link,
+    ContactInfo,
+    SocialLink
+} from '@/types/types.ts'
 
-type Value = {
-    title: string;
-    description: string;
-    icon: string;
-    color: string;
-};
-
-interface MenuItem {
-    label: string;
-    link: string;
-}
-
-interface Menu {
-    label: string;
-    link?: string;
-    items?: MenuItem[];
-}
-
-interface Stat {
-    label: string;
-    value: number;
-    icon: any;
-    color: string;
-}
-
-interface Slide {
-    image: string;
-    title: string;
-    description: string;
-    buttonText: string;
-    link: string;
-}
-
-interface Link {
-    title: string;
-    url: string;
-}
-
-interface ContactInfo {
-    icon: any;
-    text: string;
-    link?: string;
-}
-
-interface SocialLink {
-    icon: any;
-    link: string;
-}
 
 const announcements = reactive<string[]>([
     "We are excited to announce our annual Office Holiday Party! Join us on December 15th at 6:00 PM in the main conference room for an evening of celebration, food, and fun. Don't forget to wear your festive attire!",
@@ -187,7 +149,7 @@ const slides = reactive<Slide[]>([
         link: '/thrift',
     },
     {
-        image: '/images/slide3.jpeg',
+        image: '/images/slide1.jpeg',
         title: 'Join the Movement',
         description: 'Be part of the change for a better future.',
         buttonText: 'Join Now',

@@ -1,23 +1,10 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-vue-next';
-
-interface Link {
-    title: string;
-    url: string;
-}
-
-interface ContactInfo {
-    icon: any;
-    text: string;
-    link?: string;
-}
-
-interface SocialLink {
-    icon: any;
-    link: string;
-}
-
+import type {
+    Link,
+    ContactInfo,
+    SocialLink
+} from '@/types/types.ts'
 const props = defineProps<{
     companyLinks: Link[];
     joinUsLinks: Link[];

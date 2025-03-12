@@ -5,14 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-
-interface Slide {
-    image: string;
-    title: string;
-    description: string;
-    buttonText: string;
-    link: string;
-}
+import type { Slide } from '@/types/types.ts'
 
 export default defineComponent({
     components: {
@@ -119,7 +112,7 @@ export default defineComponent({
                     </p>
                     <NuxtLink 
                         :to="slide.link" 
-                        class="mt-6 px-6 py-3 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition"
+                        class="mt-6 px-6 py-3 bg-white text-black rounded-[25px] font-semibold hover:bg-gray-200 transition"
                     >
                         {{ slide.buttonText }}
                     </NuxtLink>

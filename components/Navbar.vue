@@ -5,17 +5,7 @@ import {
     ChevronDownIcon, 
     XIcon 
 } from "lucide-vue-next";
-
-interface MenuItem {
-    label: string;
-    link: string;
-}
-
-interface Menu {
-    label: string;
-    link?: string;
-    items?: MenuItem[];
-}
+import type { Menu } from '@/types/types.ts'
 
 const props = defineProps<{
     menus: Menu[];

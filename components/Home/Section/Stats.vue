@@ -2,14 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useIntervalFn } from "@vueuse/core";
 import { useRouter } from '#vue-router'
-
-interface Stat {
-  label: string;
-  value: number;
-  icon: any;
-  color: string;
-}
-
+import type { Stat } from '@/types/types.ts'
 const router = useRouter();
 
 const props = defineProps<{

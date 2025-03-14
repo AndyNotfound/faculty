@@ -13,8 +13,13 @@ const animatedValues = ref(props.stats.map(() => 0));
 
 const startCounting = () => {
   props.stats.forEach((stat, index) => {
+    // Calculate step size: Ex. 150 / 50 = 3
     const step = Math.ceil(stat.value / 50);
+
+    // Set interval to increment value every 50ms
     useIntervalFn(() => {
+      // Increment animated value until it reaches the stat value
+      // Ex. If animated value is 0, it will increase by 3
       if (animatedValues.value[index] < stat.value) {
         animatedValues.value[index] = Math.min(animatedValues.value[index] + step, stat.value);
       }
